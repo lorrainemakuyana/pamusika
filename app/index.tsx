@@ -1,104 +1,45 @@
 import { Text, View, Image, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import Logo from "../assets/images/logo.webp";
-import BlueButton from "@/components/buttons/BlueButton";
+import Logo from "~/images/icon-white.png";
+import React from "react";
+import CustomButton from "@/components/buttons/CustomButton";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        height: "100%",
-        display: "flex",
-      }}
-    >
-      <View
-        style={{
-          height: "70%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 50,
-        }}
-      >
+    <View className="h-full w-full flex">
+      <View className="h-[70%] mt-14 flex justify-center items-center">
         <View
           style={{
             width: 150,
             height: 150,
-            backgroundColor: "#FFF",
-            borderRadius: 9999,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            shadowColor: "#000",
-            shadowRadius: 25,
-            shadowOpacity: 0.5,
           }}
+          className="flex justify-center items-center shadow shadow-gray-400"
         >
-          <Image
-            style={{
-              width: "50%",
-              resizeMode: "contain",
-            }}
-            source={Logo}
-          />
+          <Image className="rounded-full w-full h-full" source={Logo} />
         </View>
-        <Text
-          style={{
-            fontWeight: 700,
-            fontSize: 40,
-            fontFamily: "RalewayBold",
-            marginTop: 20,
-          }}
-        >
+        <Text className="text-5xl font-bold font-ralewaybold mt-5">
           Pamusika
         </Text>
-        <Text
-          style={{
-            textAlign: "center",
-            marginTop: 20,
-            marginHorizontal: 60,
-            fontFamily: "Raleway",
-            fontSize: 18,
-            lineHeight: 26,
-          }}
-        >
+        <Text className="text-center mt-5 text-lg font-raleway mx-14">
           Everything you need {"\n"}
-          in one place {"\n"}
-          from the comfort of your home!
+          at your convenience
         </Text>
       </View>
-      <View
-        style={{
-          height: "30%",
-          display: "flex",
-          marginHorizontal: 20,
-        }}
-      >
-        <BlueButton text="Let's get started!" onClick={() => {}} />
-        <Pressable
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 50,
-          }}
-        >
-          <Text
-            style={{
-              textAlign: "center",
-              marginRight: 5,
-              fontFamily: "Raleway",
-              fontSize: 16,
-            }}
-          >
+      <View className="flex mx-5">
+        <CustomButton
+          color="green"
+          text="Let's get started!"
+          onClick={() => {}}
+        />
+        <Pressable className="flex flex-row justify-center items-center mt-12">
+          <Text className="text-center mr-1 font-raleway text-lg">
             I already have an account
           </Text>
           <Ionicons
             name="arrow-forward-circle-outline"
             size={24}
-            color="#004CFF"
+            color="#008000"
           />
         </Pressable>
       </View>
