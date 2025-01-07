@@ -40,5 +40,5 @@ export function useKeyboardAdjust() {
     </KeyboardAvoidingView>
   );
 
-  return { KeyboardAdjustingView };
+  return KeyboardAdjustingView;
 }

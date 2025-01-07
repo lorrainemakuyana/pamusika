@@ -2,10 +2,11 @@ import { Text, View, Image, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Logo from "~/images/icon-white.png";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomButton from "@/components/buttons/CustomButton";
+import { Link } from "expo-router";
 
-export default function Index() {
+export default function Landing() {
   return (
     <View className="h-full w-full flex">
       <View className="h-[70%] mt-14 flex justify-center items-center">
@@ -26,22 +27,33 @@ export default function Index() {
           at your convenience
         </Text>
       </View>
-      <View className="flex mx-5">
+      <View className="mx-5">
         <CustomButton
           color="green"
           text="Let's get started!"
-          onClick={() => {}}
+          href="/auth"
+          params={{ route: "register" }}
         />
-        <Pressable className="flex flex-row justify-center items-center mt-12">
-          <Text className="text-center mr-1 font-raleway text-lg">
-            I already have an account
-          </Text>
-          <Ionicons
-            name="arrow-forward-circle-outline"
-            size={24}
-            color="#008000"
-          />
-        </Pressable>
+        <Link
+          href={{
+            pathname: "/auth",
+            params: {
+              route: "login",
+            },
+          }}
+          className="mt-12 mx-auto"
+        >
+          <View className="flex flex-row justify-center items-center">
+            <Text className="text-center mr-1 font-raleway text-lg">
+              I already have an account
+            </Text>
+            <Ionicons
+              name="arrow-forward-circle-outline"
+              size={24}
+              color="#008000"
+            />
+          </View>
+        </Link>
       </View>
     </View>
   );

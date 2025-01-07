@@ -1,17 +1,21 @@
+import { Link } from "expo-router";
 import React from "react";
 import { Pressable, Text, TouchableOpacity } from "react-native";
-// import { TouchableOpacity } from "react-native-gesture-handler";
 
 function CustomButton({
   text,
-  onClick,
+  onClick = () => {},
   color,
   disabled = false,
+  href = "",
+  params = {}
 }: {
   text: String;
-  onClick: () => any;
+  onClick?: () => any;
   color: "violet" | "orange" | "green";
   disabled?: boolean;
+  href?: any;
+  params?: {};
 }) {
   const getColor = (color: string) => {
     switch (color) {
@@ -31,27 +35,35 @@ function CustomButton({
   const buttonColor = getColor(color);
 
   return (
-    <TouchableOpacity
-      disabled={disabled}
-      style={{
-        width: "100%",
-        borderRadius: 15,
-        padding: 15,
-        backgroundColor: disabled ? "transparent" : buttonColor,
-        borderColor: buttonColor,
-        borderWidth: disabled ? 1 : 0,
-      }}
-      onPress={onClick}
-    >
-      <Text
+    <Link href={{
+      pathname: href,
+      params: {
+        route: "register",
+      }
+    }}
+    asChild >
+      <Pressable
+        disabled={disabled}
         style={{
-          color: disabled ? buttonColor : "white",
+          width: "100%",
+          borderRadius: 15,
+          padding: 15,
+          backgroundColor: disabled ? "gray" : buttonColor,
+          borderColor: disabled ? "gray" : buttonColor,
+          borderWidth: disabled ? 1 : 0,
         }}
-        className="text-center font-raleway text-lg"
+        onPress={onClick}
       >
-        {text}
-      </Text>
-    </TouchableOpacity>
+        <Text
+          style={{
+            color: "white",
+          }}
+          className="text-center font-raleway text-lg"
+        >
+          {text}
+        </Text>
+      </Pressable>
+    </Link>
   );
 }
 
