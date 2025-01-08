@@ -1,4 +1,5 @@
 import CustomButton from "@/components/buttons/CustomButton";
+import { signIn } from "@/firebase/auth";
 import React, { useState } from "react";
 import {
   View,
@@ -14,7 +15,15 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = () => {};
+  const login = async () => {
+    const uid = await signIn(email, password);
+    if (uid) {
+      console.log("Logged in successfully", { uid });
+    } else {
+      console.log("Failed to login", { email, password });
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       className="flex-1"
@@ -58,6 +67,7 @@ function Login() {
           text="Login"
           href="/auth"
           disabled={!email || !password}
+          onClick={login}
         />
       </View>
     </KeyboardAvoidingView>

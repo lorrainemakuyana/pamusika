@@ -1,4 +1,6 @@
 import CustomButton from "@/components/buttons/CustomButton";
+import { createUser } from "@/firebase/auth";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   View,
@@ -16,10 +18,24 @@ function Login() {
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const register = () => {
+  const register = async () => {
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      alert("Passwords do not match!");
       return;
+    }
+
+    const user = await createUser(name, email, password);
+
+    if (user) {
+      if (user == "auth/email-already-in-use") {
+        alert("Email already in use. Please login!");
+        return;
+      }
+
+      console.log("Registered successfully", { user });
+      router.replace("/home");
+    } else {
+      console.log("Failed to register", { email, password });
     }
   };
 
@@ -57,6 +73,7 @@ function Login() {
             keyboardType="email-address"
             onChangeText={(text) => setEmail(text)}
             value={email}
+            autoCapitalize="none"
           />
           <TextInput
             className="w-full h-14 border border-gray-700 rounded-md px-3 mt-6"
@@ -82,6 +99,7 @@ function Login() {
           text="Sign up"
           href="/auth"
           disabled={!email || !password || !name || !confirmPassword}
+          onClick={register}
         />
       </View>
     </KeyboardAvoidingView>
